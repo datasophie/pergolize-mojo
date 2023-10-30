@@ -1,0 +1,20 @@
+---
+version: v1
+components:
+- name: mojo-lab # give the component a name
+  docker:
+    # tell pergola which Dockerfile to use
+    file: Dockerfile
+    build-context: "."
+    build-args:
+    - name: AUTH_KEY
+      value: YOUR_UNIQUE_API_KEY # provide your api key from https://developer.modular.com/download
+  storage:
+  # create a persistent volume for your workspace
+  - name: workspace
+    path: "/workspace"
+    size: 10Gi
+  ports:
+  - 8888
+  ingresses:
+  - host: lab
